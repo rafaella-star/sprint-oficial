@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Orçamento</title>
+</head>
+<body style="background: lightseagreen;">
+    
+    
+    
+    <div style="text-align: center; background: #132235 ;"><img src="Termo Sense.png" width="300 px" alt="logo_Termosense"></div>
+    <h1 style="color:#132235; text-align: center;">Calculadora de Perda e Ganho</h1>
+    
+    Digite aqui quantos medicamentos termolábeis é recebido por <b>ano:</b> <br>
+    <input type="text" id="valor_anualremedio" placeholder="Ex: 100.000 (apenas números)"> <br> <br>
+    
+    Digite aqui o valor de cada <b>medicamento termolábel:</b> <br> 
+    <input type="text" id="valor_medicamentounitario" placeholder="Ex: R$ 30,00 (apenas números)"> <br> <br>
+    
+    Digite aqui quantos medicamentos termolábeis é <b>perdido</b> anualmente: <br>
+    <input type="text" id="valor_medicamentoperdido" placeholder="Ex: 27.000 (apenas números)"> <br> <br> 
+    
+    <button onclick=calculo()  id="calculo" style="background-color: lightskyblue;">Calcular Prejuízo
+    </button> 
+    
+    <button onclick=limpar()  id="limpar" style="background-color: lightskyblue;">Limpar
+    </button>
+    
+    <br> <br> <br>
+    
+    <h3 style="text-align: center;">O Resultado irá sair aqui:</h3>
+    <div id="div_msg1" style="text-align: center;"> </div> 
+    
+    <h1 style="color: #132235; text-align: center;" >Orçamento dos sensores</h1>
+    
+    
+    <h2>Preço fixo</h2>
+    
+    
+    
+    Sensor de temperatura Lm35 sai por: <b>R$15,00</b>
+    <br>
+    
+    
+    <br>
+    Sensor de Umidade e Temperatura DHT11 sai por: <b>R$ 13,90</b> 
+    
+    <br><br>
+    
+    <h4>Quantos sensores você deseja?</h4>
+    
+    Sensor de <b>Temperatura</b> (LM35):
+    <input id="sensor_lm35" type="text" placeholder= "Insira aqui">
+    
+    <br><br>
+    
+    Sensor de <b>umidade</b> (DHT11):
+    <input id="sensor_dht11" type="text" placeholder= "Insira aqui">
+    
+    <br><br>
+    
+    (Concluindo o pedido dos sensores, vem com a taxa dos nossos serviços já inclusa, no valor de R$ 25.000,00)
+    
+    <p></p>
+    
+    <button onclick="total()" style="background: deepskyblue;">Total</button>
+    <button onclick="limpe()" style="background: deepskyblue;">Limpar</button>
+    
+    <div id="div_msg2" style="text-align: center;"></div>
+    
+</body>
+</html>
+
+<script>
+    
+    function calculo() {
+        var n1 = Number (valor_anualremedio.value);
+        var n2 = Number (valor_medicamentounitario.value);
+        var n3 = Number (valor_medicamentoperdido.value);
+        var n4 = Number (100)
+        var result1 = Number (n3 * n4)
+        var result2 = Number (result1 / n1)
+        var result3 = Number (n2 * n3)
+        var result4 = (n1 / n4) * 75;
+        var result5 = (result4 / n1) * n4;
+        var result6 = (n2  * 75);
+        var result7 = (result6 / n2) ;
+        
+        div_msg1.innerHTML = `Seu prejuízo anual por conta da perda de remédios termolábeis é de ${result2.toFixed(2)}%
+        que equivale á R$ ${result3.toFixed(2)}. <br> Com a Termo Sense você conseguirá evitar o máximo desses prejuízos com
+        nossos sensores embutidos nas geladeiras e nos transportes <br> garantindo a eficácia e durabiliade do medicamento.
+        Realize já o seu orçamento! <br><br><h3><b>Resultado pela nossa prestação de serviço: </b></h3> <br><br>
+        Eficácia com TermoSense: 75% <br><br>
+         Medicamentos aproveitados com a Termosense: ${result4} (${result5}%)<br>
+         Total de dinheiro aproveitado: R$ ${result6} (${result7}%)`
+    }
+    
+    function total(){
+        
+        var lm35 = 15.00;
+        var dht11 = 13.90;
+        var qtdLm35 = Number (sensor_lm35.value) * lm35;
+        var qtdDht11 = Number (sensor_dht11.value) * dht11;
+        var resultado = qtdLm35 + qtdDht11;
+        var taxaServico = resultado + 25000;
+        
+        var totalSensores = Number (sensor_lm35.value) + Number (sensor_dht11.value);
+        
+        div_msg2.innerHTML += `Você solicitou: ${totalSensores} sensores. <br>`;
+        div_msg2.innerHTML += `Foram ${sensor_lm35.value} sensores LM35, no valor total de: R$ ${qtdLm35}. <br>`;
+        div_msg2.innerHTML += `Foram ${sensor_dht11.value} sensores DHT11, no valor total de: R$ ${qtdDht11}.<br><br>`;
+        div_msg2.innerHTML += `O valor total da sua compra é de: R$ ${taxaServico.toFixed(2)}, com a taxa dos nossos serviços já inclusa.`;
+    }
+    
+    function limpar(){
+        
+        valor_anualremedio.value = " ";
+        valor_medicamentounitario.value = " ";
+        valor_medicamentoperdido.value = " ";
+        div_msg1.innerHTML = " ";
+        
+    }
+    
+    function limpe(){
+        
+        sensor_lm35.value = " ";
+        sensor_dht11.value = " ";
+        div_msg2.innerHTML = " ";
+    }
+</script>
